@@ -1,41 +1,27 @@
-<html>
-    <body>
-        <script src="http://cdn.pubnub.com/pubnub-3.15.2.min.js"></script>
-        <script>
-function publish() {
- 
-    pubnub = PUBNUB({
-        publish_key : 'demo',
-        subscribe_key : 'demo'
-    })
-     
-    console.log("Subscribing..");
-    pubnub.subscribe({                                     
-        channel : "hello_world",
-        message : function (message, envelope, channelOrGroup, time, channel) {
-            console.log(
-                "Message Received." + "\n" +
-                "Channel or Group : " + JSON.stringify(channelOrGroup) + "\n" +
-                "Channel : " + JSON.stringify(channel) + "\n" +
-                "Message : " + JSON.stringify(message) + "\n" +
-                "Time : " + time + "\n" +
-                "Raw Envelope : " + JSON.stringify(envelope)
-            )
-        },
-        connect : pub
-    })
- 
-    function pub() {
-        console.log("Since we're publishing on subscribe connectEvent, we're sure we'll receive the following publish.");
-        pubnub.publish({
-            channel : "hello_world",
-            message : "Hello from PubNub Docs!",
-            callback : function(m){
-                console.log(m)
-            }
-        })
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Element');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Nitrogen', 0.78],
+        ['Oxygen', 0.21],
+        ['Other', 0.01]
+      ]);
+
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+      chart.draw(data, null);
     }
-};
-</script>
-    </body>
-</html>
+  </script>
+</head>
+<body>
+  <!-- Identify where the chart should be drawn. -->
+  <div id="myPieChart"/>
+</body>
