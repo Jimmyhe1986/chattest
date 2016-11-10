@@ -1,26 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <title>Google Visualization API Sample</title>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load("current", {packages:['table']});
-    google.charts.setOnLoadCallback(drawVisualization);
-    function drawVisualization() {
-      google.visualization.drawChart({
-        "containerId": "visualization_div",
-        "dataSourceUrl": "//www.google.com/fusiontables/gvizdata?tq=",
-        "query":"SELECT '分类', '备注' FROM " +
-                "1V3wkIZGxKQQCL9eqrCDqI7t8uk6W4JlqZngE8w9NPBw",
-        "refreshInterval": 5,
-        "chartType": "Table",
-        "options": {}
-     });
+function drawGID() {
+      var queryString = encodeURIComponent('SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8');
+
+      var query = new google.visualization.Query(
+          'https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq?gid=0&headers=1&tq=' + queryString);
+      query.send(handleQueryResponse);
     }
-  </script>
-</head>
-<body style="font-family: Arial;border: 0 none;">
-  <div id="visualization_div" style="width: 600px; height: 400px;"></div>
-</body>
-</html>
+
+    function handleQueryResponse(response) {
+      if (response.isError()) {
+        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        return;
+      }
+
+      var data = response.getDataTable();
+      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      chart.draw(data, { height: 400 });
+    }
