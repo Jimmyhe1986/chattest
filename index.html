@@ -1,104 +1,74 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Google Developers</title>
-    
-  
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
 
-    <meta name="robots" content="noindex">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://google-developers.appspot.com/_static/3260bec2e7/js/jquery_ui-bundle.js?hl=zh-cn"></script>
-    <script src="//www.google.com/jsapi?key=AIzaSyCZfHRnq7tigC-COeQRmoa9Cxr0vbrK6xw&hl=zh-cn"></script>
-    
-    <script src="https://google-developers.appspot.com/_static/3260bec2e7/js/framebox.js?hl=zh-cn"></script>
+      // Load the Visualization API and the controls package.
+      google.charts.load('current', {'packages':['corechart', 'controls']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawDashboard);
+
+      // Callback that creates and populates a data table,
+      // instantiates a dashboard, a range slider and a pie chart,
+      // passes in the data and draws it.
+      function drawDashboard() {
+
+        // Create our data table.
+        var data = google.visualization.arrayToDataTable([
+          ['Name', 'Donuts eaten'],
+          ['Michael' , 5],
+          ['Elisa', 7],
+          ['Robert', 3],
+          ['John', 2],
+          ['Jessica', 6],
+          ['Aaron', 1],
+          ['Margareth', 8]
+        ]);
+
+        // Create a dashboard.
+        var dashboard = new google.visualization.Dashboard(
+            document.getElementById('dashboard_div'));
+
+        // Create a range slider, passing some options
+        var donutRangeSlider = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'filter_div',
+          'options': {
+            'filterColumnLabel': 'Donuts eaten'
+          }
+        });
+
+        // Create a pie chart, passing some options
+        var pieChart = new google.visualization.ChartWrapper({
+          'chartType': 'PieChart',
+          'containerId': 'chart_div',
+          'options': {
+            'width': 300,
+            'height': 300,
+            'pieSliceText': 'value',
+            'legend': 'right'
+          }
+        });
+
+        // Establish dependencies, declaring that 'filter' drives 'pieChart',
+        // so that the pie chart will only display entries that are let through
+        // given the chosen slider range.
+        dashboard.bind(donutRangeSlider, pieChart);
+
+        // Draw the dashboard.
+        dashboard.draw(data);
+      }
+    </script>
   </head>
-  <body class="devsite-layout-docs devsite-framebox
-               ">
-<meta name="suppress_site_styles" content="true" /><p style="display: none; height: 0; width: 0">This is a snippet from developers.google.com</p>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<div id="stringFilter_dashboard_div" style="border: 1px solid #ccc">
-  <div id="stringFilter_control_div" style="padding-left: 2em"></div>
-  <div id="stringFilter_chart_div"></div>
-</div>
-
-<script type="text/javascript">
-    google.charts.load('current', {packages:['corechart', 'table', 'gauge', 'controls']});
-    google.charts.setOnLoadCallback(drawStringFilter);
-
-  function drawStringFilter() {
-    var dashboard = new google.visualization.Dashboard(
-        document.getElementById('stringFilter_dashboard_div'));
-    var control = new google.visualization.ControlWrapper({
-      'controlType': 'StringFilter',
-      'containerId': 'stringFilter_control_div',
-      'options': {
-        'filterColumnIndex': 0
-      }
-    });
-    var chart = new google.visualization.ChartWrapper({
-      'chartType': 'Table',
-      'containerId': 'stringFilter_chart_div',
-      'options': {'height': '100%', 'width': '100%'}
-    });
-    var data = google.visualization.arrayToDataTable([
-      ['Name', 'Age'],
-      ['Michael' , 12],
-      ['Elisa', 20],
-      ['Robert', 7],
-      ['John', 54],
-      ['Jessica', 22],
-      ['Aaron', 3],
-      ['Margareth', 42],
-      ['Miranda', 33]
-    ]);
-    dashboard.bind(control, chart);
-    dashboard.draw(data);
-  }
-</script>
-
-
-    
-
-
-  
-    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: null, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension8&quot;: &quot;scriptsafe&quot;, &quot;dimension1&quot;: &quot;Signed out&quot;}, &quot;gaid&quot;: &quot;UA-24532603-1&quot;}">
-  
-    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {}, &quot;gaid&quot;: &quot;UA-47037920-1&quot;}">
-  
-    <input class="google-analytics-id-json" type="hidden" value="{&quot;dimensions&quot;: {&quot;dimension6&quot;: null, &quot;dimension5&quot;: &quot;zh-cn&quot;, &quot;dimension3&quot;: false, &quot;dimension8&quot;: &quot;scriptsafe&quot;, &quot;dimension1&quot;: &quot;Signed out&quot;}, &quot;gaid&quot;: &quot;UA-49880327-1&quot;}">
-  
-
-
-
-  
-  
-    <script>
-      var dataLayer = [{"freeTrialEligibleUser": "False", "language": {"requested": "zh-cn", "served": null}, "projectName": null, "scriptsafe": "scriptsafe", "signedIn": "False", "internalUser": "False"}];
-    </script>
-  
-
-
-
-    <script>
-      
-      window.onload = function() {
-          // Initialize the settings variables we get from the server side
-        devsite.settings.initSettings({'SITE_NAME': 'devsite', 'HISTORY_ENABLED': 1, 'SUBPATH': '', 'FULL_SITE_SEARCH_ENABLED': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.devsitetest.how', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'REPLACE_BLOCKED_VIDEOS': 0, 'VERSION_HASH': '3260bec2e7', 'SCRIPTSAFE_DOMAIN': 'google-developers.appspot.com'} || {});
-        // DevsiteUtilParams rely on devsite.settings.
-        devsite.utils.initDevsiteUtilParams('https://google-developers.appspot.com/?hl=zh-cn',
-            devsite.settings['ALLOWED_HOSTS'].concat('youtube.com'));
-        devsite.permissions.init({"044f63022fa45182fb1e55a4cf633f49": true, "5d17cf7d98343d37cdc5bede08b7b28e": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": false, "51470233c56fc1fde50f00b73c52b216": false, "4c1e030265e73d132474df5ca11667f1": true, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
-        devsite.base.init(null, null, top, false);
-        
-        devsite.analytics.InitAnalytics(true);
-
-        
-      }
-
-      
-    </script>
+  <body>
+    <!--Div that will hold the dashboard-->
+    <div id="dashboard_div">
+      <!--Divs that will hold each control and chart-->
+      <div id="filter_div"></div>
+      <div id="chart_div"></div>
+    </div>
   </body>
 </html>
-
