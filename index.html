@@ -102,22 +102,35 @@
     </script>
   </body>
 </html>
-
+<header id="sheet-name">Sheet</header>
+<pre class="prettyprint">
     function drawSheetName() {
-      var queryString = encodeURIComponent('SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8');
+      var queryString = encodeURIComponent(&#39;SELECT A, H, O, Q, R, U LIMIT 5 OFFSET 8&#39;);
 
       var query = new google.visualization.Query(
-          'https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq?sheet=Sheet1&headers=1&tq=' + queryString);
+          &#39;https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq?sheet=Sheet1&amp;headers=1&amp;tq=&#39; + queryString);
       query.send(handleSampleDataQueryResponse);
     }
 
     function handleSampleDataQueryResponse(response) {
       if (response.isError()) {
-        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+        alert(&#39;Error in query: &#39; + response.getMessage() + &#39; &#39; + response.getDetailedMessage());
         return;
       }
 
       var data = response.getDataTable();
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+      var chart = new google.visualization.ColumnChart(document.getElementById(&#39;chart_div&#39;));
       chart.draw(data, { height: 400 });
     }
+</pre>
+</article>
+</section>
+ <div class="special">
+   <h3><a name="queryurlformat" id="queryurlformat"></a>Query Source Ranges</h3>
+   <p>The query source URL specifies what part of a spreadsheet to use in the
+     query: a specific cell, range of cells, rows, or columns, or a whole spreadsheet. Specify the
+     range using the &quot;range=&lt;<em>range_expr</em>&gt;&quot; syntax, for example:</p>
+   <pre>
+https://docs.google.com/spreadsheets/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq?<strong>range=A1:C4</strong>
+   </pre>
+  
