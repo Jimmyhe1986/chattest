@@ -82,23 +82,6 @@
 
 
 
-    <script>
-      
-      window.onload = function() {
-          // Initialize the settings variables we get from the server side
-        devsite.settings.initSettings({'ENABLE_BLOCKED_LINK_TOOLTIP': 0, 'ENABLE_BLOCKED_VIDEO_PLACEHOLDER': 0, 'SITE_NAME': 'devsite', 'HISTORY_ENABLED': 1, 'SUBPATH': '', 'FULL_SITE_SEARCH_ENABLED': 1, 'ALLOWED_HOSTS': ['.android.com', '.appspot.com', '.devsitetest.how', '.gonglchuangl.net', '.google.cn', '.google.com', '.googleplex.com', '.tensorflow.org'], 'VERSION_HASH': 'c58f0680c0', 'SCRIPTSAFE_DOMAIN': 'google-developers.appspot.com'} || {});
-        // DevsiteUtilParams rely on devsite.settings.
-        devsite.utils.initDevsiteUtilParams('https://google-developers.appspot.com/?hl=zh-cn',
-            devsite.settings['ALLOWED_HOSTS'].concat('youtube.com'));
-        devsite.permissions.init({"044f63022fa45182fb1e55a4cf633f49": true, "5d17cf7d98343d37cdc5bede08b7b28e": true, "098dafe57affddc137df300142652cfd": false, "cb025a64a50094835616312f4774a53d": true, "51470233c56fc1fde50f00b73c52b216": false, "4c1e030265e73d132474df5ca11667f1": true, "752953480de00a336d911a46966cc16d": false, "700def1a83e356c06c0925afb05de4b0": false, "6749dcb526ce9bde6993550c7d928d24": true});
-        devsite.base.init(null, null, top, false);
-        
-        devsite.analytics.InitAnalytics(true);
-
-        
-      }
-
-      
-    </script>
+   
   </body>
 </html>
